@@ -4,8 +4,13 @@ const path = require('path');
 const app = express();
 require('dotenv').config();
 
+// harry potter api function
 const hpApi = require('./lib/harrypotter');
 const getCharacters = hpApi.getCharacters;
+
+// nasa api function
+const nasaApi = require('./lib/apod');
+const getApod = nasaApi.getApod;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -55,7 +60,18 @@ app.get('/harrypotter/:house', async (req, res) => {
 	res.render(template, { students });
 });
 
+app.get('/apod', async (req, res) => {
+	let data = await getApod();
+	let img = {
+		copyright: data.copyright,
+		date: data.date,
+		explanation: data.explanation,
+		title: data.title,
+		src: data.url
+	}
 
+	res.render('apod', { img });
+})
 
 app.listen(3000, () => {
 	console.log('listening on port 3000');
