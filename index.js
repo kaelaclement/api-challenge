@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
 require('dotenv').config();
 
@@ -12,6 +13,13 @@ const getCharacters = hpApi.getCharacters;
 const nasaApi = require('./lib/apod');
 const getApod = nasaApi.getApod;
 
+// star wars api function
+const starwarsApi = require('./lib/starwars');
+const sortCharData = starwarsApi.sortCharData;
+const getFilmData = starwarsApi.getStarWarsFilm;
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine('.hbs', hbs({
@@ -71,6 +79,23 @@ app.get('/apod', async (req, res) => {
 	}
 
 	res.render('apod', { img });
+});
+
+app.get('/starwars', (req, res) => {
+	res.render('starwars');
+});
+
+app.post('/starwars/character', async (req, res) => {
+	let number = req.body.charNum;
+	let charResponse = await sortCharData(number);
+	res.render('starwars', { charResponse })
+});
+
+app.post('/starwars/crawl', async (req, res) => {
+	let number = req.body.filmNum;
+	let filmResponse = await getFilmData(number);
+	let crawl = filmResponse.opening_crawl;
+	res.render('starwars', { crawl })
 })
 
 app.listen(3000, () => {

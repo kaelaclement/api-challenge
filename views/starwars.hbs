@@ -1,0 +1,23 @@
+<h1>Star Wars shit</h1>
+
+<h3>Find character by id</h3>
+
+<form action="/starwars/character" method="post">
+	<input type="text" name="charNum" id="charNum" />
+	<input type="submit" value="submit" />
+</form>
+
+<ul>
+	{{#each charResponse}}
+	<li>{{this}}</li>
+	{{/each}}
+</ul>
+
+<h3>Opening crawl by film (1 - 6 by release order)</h3>
+
+<form action="/starwars/crawl" method="post">
+	<input type="text" name="filmNum" id="filmNum" />
+	<input type="submit" value="submit" />
+</form>
+
+<p>{{crawl}}</p>
