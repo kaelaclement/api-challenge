@@ -6,3 +6,33 @@
 .navbar a {
 	padding: 2em;
 }
+
+.content {
+	text-align: center;
+	padding: 5em;
+	margin: 0 5em;
+}
+
+.Hufflepuff {
+	padding: 5em;
+	margin: 0 5em;
+	background-color: rgb(197, 146, 6);
+}
+
+.Ravenclaw {
+	padding: 5em;
+	margin: 0 5em;
+	background-color: rgb(3, 74, 147);
+}
+
+.Slytherin {
+	padding: 5em;
+	margin: 0 5em;
+	background-color: rgb(16, 69, 29);
+}
+
+.Gryffindor {
+	padding: 5em;
+	margin: 0 5em;
+	background-color: rgb(109, 14, 31);
+}
