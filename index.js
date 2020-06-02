@@ -35,24 +35,19 @@ app.get('/', (req, res) => {
 
 app.get('/harrypotter/:house', async (req, res) => {
 	let house;
-	let template;
 
 	switch (req.params.house) {
 		case 'hufflepuffs':
 			house = 'Hufflepuff';
-			template = req.params.house;
 			break;
 		case 'ravenclaws':
 			house = 'Ravenclaw';
-			template = req.params.house;
 			break;
 		case 'gryffindors':
 			house = 'Gryffindor';
-			template = req.params.house;
 			break;
 		case 'slytherins':
 			house = 'Slytherin';
-			template = req.params.house;
 			break;
 		default:
 			res.send('Error - that is not a harry potter house');
@@ -61,11 +56,11 @@ app.get('/harrypotter/:house', async (req, res) => {
 
 	let data = await getCharacters(house);
 
-	let students = data.map(student => {
-		return student.name;
+	let characters = data.map(character => {
+		return character.name;
 	});
 
-	res.render(template, { students });
+	res.render('hpcharacters', { characters, house });
 });
 
 app.get('/apod', async (req, res) => {
