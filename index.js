@@ -91,7 +91,7 @@ app.post('/starwars/crawl', async (req, res) => {
 	let filmResponse = await getFilmData(number);
 	let crawl = filmResponse.opening_crawl;
 	res.render('starwars', { crawl })
-})
+});
 
 app.listen(3000, () => {
 	console.log('listening on port 3000');
